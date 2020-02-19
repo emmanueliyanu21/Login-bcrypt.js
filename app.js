@@ -1,16 +1,17 @@
 // npm install express bycrptjs mongoose body-parser
 const express = require('express');
-const app = require('express');
+const app = express();
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const User = require('./models/user');
-const bcrypt = requier('bcryptjs')
+const bcrypt = require('bcryptjs')
 
-app.use(bodyParser.json());
+// bodyparser
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:27.0.0.1/login', { useMongoClient: true }, () => {
-    console.log('connected ')
+mongoose.connect('mongodb://localhost:27.0.0.1/login', { useUnifiedTopology: true }, () => {
+    console.log('connected')
 });
 
 // mongoose require a promise
@@ -32,6 +33,7 @@ app.post('/register', (req, res) => {
             }).catch(err => {
                 res.send('User was not saved because...', err);
             });
+            
         })
     })
     // res.send(newUser); 
@@ -53,6 +55,8 @@ app.post('/login', (req, res) => {
     })
 })
 
-app.listen(4000, () => {
-    console.log('server started on port 4000')
+app.listen(4200, () => {
+    console.log('server started on port 4200')
 })
+
+// npm list - g--depth = 0
